@@ -4,6 +4,7 @@ import datetime
 import time
 import base64
 import mimetypes
+import pytz
 
 # Configurazione Pagina
 st.set_page_config(page_title="Ready2Play", page_icon="logo_r2p.png", layout="centered")
@@ -488,7 +489,8 @@ with tabs[5]:
     if not st.session_state.bookings:
         st.warning("Nessuna prenotazione disponibile per lo Smart Access.")
     else:
-        now = datetime.datetime.now()
+        tz_italy = pytz.timezone('Europe/Rome')
+        now = datetime.datetime.now(tz_italy)
         eligible_bookings = []
         for b in st.session_state.bookings:
             match_start = datetime.datetime.combine(b['data'], b['ora'])
