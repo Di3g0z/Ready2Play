@@ -493,7 +493,7 @@ with tabs[5]:
         now = datetime.datetime.now(tz_italy)
         eligible_bookings = []
         for b in st.session_state.bookings:
-            match_start = datetime.datetime.combine(b['data'], b['ora'])
+            match_start = tz_italy.localize(datetime.datetime.combine(b['data'], b['ora']))
             if now <= match_start <= now + datetime.timedelta(minutes=30):
                 eligible_bookings.append((b, match_start))
 
